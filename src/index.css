@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: #050505;
+    color: #ffffff;
+}
+
+.font-display {
+    font-family: 'Syne', sans-serif;
+}
+
+/* Global Placeholder Override */
+::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1; /* Firefox */
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1;
+}
+
+/* Ant Design Dark Mode Overrides */
+.ant-picker {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+.ant-picker:hover, .ant-picker-focused {
+    border-color: #D4AF37 !important;
+}
+
+.ant-picker-input > input {
+    color: white !important;
+    font-weight: 500;
+}
+
+.ant-picker-input > input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.ant-picker-suffix {
+    color: #D4AF37 !important;
+}
+
+.ant-picker-clear {
+    background: #1a1a1a;
+    color: white;
+}
+
+/* Dropdown/Popup Styles */
+.dark-picker .ant-picker-panel-container {
+    background-color: #0a0a0a !important;
+    background: #0a0a0a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 16px;
+}
+
+.dark-picker .ant-picker-header {
+    color: white !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-picker .ant-picker-header button {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.dark-picker .ant-picker-content th {
+    color: #D4AF37 !important;
+}
+
+.dark-picker .ant-picker-cell {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark-picker .ant-picker-cell-in-view {
+    color: white !important;
+}
+
+.dark-picker .ant-picker-cell-selected .ant-picker-cell-inner {
+    background-color: #D4AF37 !important;
+    color: black !important;
+}
+
+.dark-picker .ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-color: #D4AF37 !important;
+}
+
+.glass-dark {
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #D4AF37;
+}
+
+.ant-select-selection-placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Ant Design Select Overrides */
+.custom-select .ant-select-selector {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    height: 100% !important;
+    border-radius: 0.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.custom-select .ant-select-arrow {
+    color: white !important;
+}
+
+.custom-select .ant-select-selection-item {
+    color: white !important;
+    font-size: 1rem !important;
+}
+
+.ant-select-dropdown {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-select-item {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.ant-select-item-option-selected {
+    background-color: rgba(212, 175, 55, 0.2) !important;
+    color: #ffd700 !important;
+    font-weight: bold;
+}
+
+.ant-select-item-option-active {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.ant-select-item-option-content {
+    color: inherit !important;
+}
+
+/* Dark Modal Overrides */
+.dark-modal .ant-modal-content {
+    background-color: #0f0f0f !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+.dark-modal .ant-modal-header {
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    margin-bottom: 24px !important;
+}
+.dark-modal .ant-modal-title {
+    color: white !important;
+}
+.dark-modal .ant-modal-close {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+.dark-modal .ant-modal-close:hover {
+    color: white !important;
+}
+
+/* Dark Form Styles */
+.dark-modal .ant-form-item-label > label {
+    color: rgba(255, 255, 255, 0.8) !important; 
+}
+
+/* Dark Input Overrides */
+.dark-input, .ant-input-number-input {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.ant-input {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    border-radius: 0.5rem;
+}
+
+.ant-input-number {
+    background-color: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.ant-input:focus, .ant-input-focused, .ant-input-number-focused {
+    border-color: #D4AF37 !important;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
+}
