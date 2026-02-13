@@ -8,11 +8,11 @@ const AdminUsers = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch('/api/auth/users', {
-                 method: 'GET',
-                 // In protected routes, browser usually sends cookies automatically if configured.
-                 // Otherwise we might need to attach Authorization header if using Bearer token strategy alongside cookies?
-                 // The backend 'protect' middleware checks req.cookies.jwt. So automatic.
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/users`, {
+                method: 'GET',
+                // In protected routes, browser usually sends cookies automatically if configured.
+                // Otherwise we might need to attach Authorization header if using Bearer token strategy alongside cookies?
+                // The backend 'protect' middleware checks req.cookies.jwt. So automatic.
             });
             const data = await response.json();
             if (response.ok) {
@@ -28,7 +28,7 @@ const AdminUsers = () => {
     const deleteUser = async (id) => {
         if (!window.confirm('Are you sure you want to delete this user?')) return;
         try {
-            const response = await fetch(`/api/auth/users/${id}`, { method: 'DELETE' });
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/users/${id}`, { method: 'DELETE' });
             if (response.ok) {
                 setUsers(users.filter(user => user._id !== id));
             }
@@ -70,7 +70,7 @@ const AdminUsers = () => {
                                 <td className="px-6 py-4">{new Date(user.createdAt).toLocaleDateString()}</td>
                                 <td className="px-6 py-4">
                                     <button onClick={() => deleteUser(user._id)} className="text-red-500 hover:text-red-400">
-                                        <Trash2 size={18}/>
+                                        <Trash2 size={18} />
                                     </button>
                                 </td>
                             </tr>

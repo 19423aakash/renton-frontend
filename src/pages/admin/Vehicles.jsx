@@ -15,7 +15,7 @@ const AdminVehicles = () => {
 
     const fetchVehicles = async () => {
         try {
-            const response = await fetch('/api/vehicles'); // Public route, maybe need admin check?
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles`); // Public route, maybe need admin check?
             // Actually, for admin dashboard we might want a specific admin route that returns even inactive ones?
             // Currently getting all.
             const data = await response.json();
@@ -36,7 +36,7 @@ const AdminVehicles = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to deactivate this vehicle?')) return;
         try {
-            const response = await fetch(`/api/vehicles/${id}`, { method: 'DELETE' });
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vehicles/${id}`, { method: 'DELETE' });
             if (response.ok) {
                 message.success('Vehicle deactivated successfully');
                 fetchVehicles();
@@ -88,11 +88,11 @@ const AdminVehicles = () => {
 
     const onFinish = async (values) => {
         const formData = new FormData();
-        
+
         // Append simple fields
         Object.keys(values).forEach(key => {
             if (key !== 'lat' && key !== 'lng' && key !== 'images') {
-                if(values[key] !== undefined) formData.append(key, values[key]);
+                if (values[key] !== undefined) formData.append(key, values[key]);
             }
         });
 
@@ -110,7 +110,7 @@ const AdminVehicles = () => {
             }
         });
 
-        const url = editingVehicle ? `/api/vehicles/${editingVehicle._id}` : '/api/vehicles';
+        const url = editingVehicle ? `${import.meta.env.VITE_API_URL}/api/vehicles/${editingVehicle._id}` : `${import.meta.env.VITE_API_URL}/api/vehicles`;
         const method = editingVehicle ? 'PUT' : 'POST';
 
         try {
@@ -139,29 +139,29 @@ const AdminVehicles = () => {
         <div className="space-y-6">
             <div className="flex justify-between items-center">
                 <h2 className="text-3xl font-bold text-white">Manage Vehicles</h2>
-                <Button 
-                    type="primary" 
+                <Button
+                    type="primary"
                     onClick={handleAdd}
                     className="bg-gold-500 text-black border-none font-bold h-10 px-6 rounded-xl hover:!bg-white hover:!text-black flex items-center gap-2"
                 >
-                    <Plus size={18}/> Add Vehicle
+                    <Plus size={18} /> Add Vehicle
                 </Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {vehicles.map(vehicle => (
                     <div key={vehicle._id} className={`bg-dark-900 border ${vehicle.isActive ? 'border-white/5' : 'border-red-500/50'} rounded-2xl overflow-hidden group relative`}>
-                         {!vehicle.isActive && <div className="absolute inset-0 bg-black/60 z-10 flex items-center justify-center pointer-events-none"><span className="bg-red-500 text-white px-3 py-1 rounded font-bold">INACTIVE</span></div>}
-                        
+                        {!vehicle.isActive && <div className="absolute inset-0 bg-black/60 z-10 flex items-center justify-center pointer-events-none"><span className="bg-red-500 text-white px-3 py-1 rounded font-bold">INACTIVE</span></div>}
+
                         <div className="h-48 overflow-hidden relative">
-                            <img 
-                                src={vehicle.images?.[0]?.startsWith('http') ? vehicle.images[0] : vehicle.images?.[0] ? `${import.meta.env.VITE_API_URL}${vehicle.images[0]}` : 'https://via.placeholder.com/300'} 
-                                alt={vehicle.name} 
+                            <img
+                                src={vehicle.images?.[0]?.startsWith('http') ? vehicle.images[0] : vehicle.images?.[0] ? `${import.meta.env.VITE_API_URL}${vehicle.images[0]}` : 'https://via.placeholder.com/300'}
+                                alt={vehicle.name}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
-                             <div className="absolute top-2 right-2 flex gap-2 z-20">
-                                <button onClick={() => handleEdit(vehicle)} className="bg-black/50 text-white p-2 rounded-full hover:bg-blue-500 transition-colors"><Edit size={16}/></button>
-                                <button onClick={() => handleDelete(vehicle._id)} className="bg-black/50 text-white p-2 rounded-full hover:bg-red-500 transition-colors"><Trash2 size={16}/></button>
+                            <div className="absolute top-2 right-2 flex gap-2 z-20">
+                                <button onClick={() => handleEdit(vehicle)} className="bg-black/50 text-white p-2 rounded-full hover:bg-blue-500 transition-colors"><Edit size={16} /></button>
+                                <button onClick={() => handleDelete(vehicle._id)} className="bg-black/50 text-white p-2 rounded-full hover:bg-red-500 transition-colors"><Trash2 size={16} /></button>
                             </div>
                         </div>
                         <div className="p-4">
@@ -211,7 +211,7 @@ const AdminVehicles = () => {
                         </Form.Item>
                     </div>
 
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Form.Item name="transmission" label="Transmission">
                             <Select className="custom-select">
                                 <Option value="Automatic">Automatic</Option>
@@ -219,7 +219,7 @@ const AdminVehicles = () => {
                             </Select>
                         </Form.Item>
                         <Form.Item name="fuelType" label="Fuel Type">
-                             <Select className="custom-select">
+                            <Select className="custom-select">
                                 <Option value="Petrol">Petrol</Option>
                                 <Option value="Diesel">Diesel</Option>
                                 <Option value="Electric">Electric</Option>
@@ -227,7 +227,7 @@ const AdminVehicles = () => {
                             </Select>
                         </Form.Item>
                     </div>
-                    
+
                     <Form.Item name="capacity" label="Capacity">
                         <Input placeholder="e.g. 4 Persons" />
                     </Form.Item>
@@ -237,24 +237,24 @@ const AdminVehicles = () => {
                     </Form.Item>
 
                     <div className="border-t border-gray-200 dark:border-gray-700 my-4 pt-4">
-                        <h4 className="font-bold mb-4 flex items-center gap-2"><MapPin size={18}/> Location Details</h4>
+                        <h4 className="font-bold mb-4 flex items-center gap-2"><MapPin size={18} /> Location Details</h4>
                         <Form.Item name="address" label="Full Address" rules={[{ required: true }]}>
                             <Input placeholder="123 Example St, City, Country" />
                         </Form.Item>
                         <div className="grid grid-cols-2 gap-4">
                             <Form.Item name="lat" label="Latitude" rules={[{ required: true }]}>
-                                <InputNumber className="w-full" step="0.000001"/>
+                                <InputNumber className="w-full" step="0.000001" />
                             </Form.Item>
                             <Form.Item name="lng" label="Longitude" rules={[{ required: true }]}>
-                                <InputNumber className="w-full" step="0.000001"/>
+                                <InputNumber className="w-full" step="0.000001" />
                             </Form.Item>
                         </div>
                     </div>
 
-                     <div className="border-t border-gray-200 dark:border-gray-700 my-4 pt-4">
-                        <h4 className="font-bold mb-4 flex items-center gap-2"><UploadIcon size={18}/> Images</h4>
-                         <Form.Item label="Upload Images">
-                            <Upload 
+                    <div className="border-t border-gray-200 dark:border-gray-700 my-4 pt-4">
+                        <h4 className="font-bold mb-4 flex items-center gap-2"><UploadIcon size={18} /> Images</h4>
+                        <Form.Item label="Upload Images">
+                            <Upload
                                 listType="picture-card"
                                 fileList={fileList}
                                 onChange={handleUploadChange}
@@ -267,7 +267,7 @@ const AdminVehicles = () => {
                                 </div>
                             </Upload>
                         </Form.Item>
-                     </div>
+                    </div>
 
                     <div className="flex gap-4 mb-4">
                         <Form.Item name="isAvailable" valuePropName="checked" label="Available for Rent">

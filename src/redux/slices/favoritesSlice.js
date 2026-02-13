@@ -4,7 +4,7 @@ export const toggleFavoriteAsync = createAsyncThunk(
     'favorites/toggle',
     async (vehicleId, thunkAPI) => {
         try {
-            const response = await fetch('/api/auth/favorites', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/favorites`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ vehicleId })
@@ -20,24 +20,24 @@ export const toggleFavoriteAsync = createAsyncThunk(
 );
 
 const initialState = {
-  items: [], // Array of vehicle IDs
-  isLoading: false,
+    items: [], // Array of vehicle IDs
+    isLoading: false,
 };
 
 const favoritesSlice = createSlice({
-  name: 'favorites',
-  initialState,
-  reducers: {
-      setFavorites: (state, action) => {
-          state.items = action.payload;
-      }
-  },
-  extraReducers: (builder) => {
-      builder
-        .addCase(toggleFavoriteAsync.fulfilled, (state, action) => {
-            state.items = action.payload; // Sync with backend
-        });
-  }
+    name: 'favorites',
+    initialState,
+    reducers: {
+        setFavorites: (state, action) => {
+            state.items = action.payload;
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(toggleFavoriteAsync.fulfilled, (state, action) => {
+                state.items = action.payload; // Sync with backend
+            });
+    }
 });
 
 export const { setFavorites } = favoritesSlice.actions;
