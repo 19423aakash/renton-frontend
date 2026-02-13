@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: import.meta.env.VITE_API_URL,
+        target: "https://renton-backend-production.up.railway.app",
         changeOrigin: true,
         secure: false,
       },
